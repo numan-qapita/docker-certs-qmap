@@ -31,7 +31,7 @@ basicConstraints = critical, CA:TRUE, pathlen:0
 EOM
 
   # Generate the root CA certificate
-  openssl req -x509 -new -key "$ROOT_CA_KEY" -sha256 -days 1024 -out "$ROOT_CA" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=Qapita Dev Root CA" -config "${CERTS_DIR}/rootCA.cnf"
+  openssl req -x509 -new -key "$ROOT_CA_KEY" -sha256 -days 1024 -out "$ROOT_CA" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=Qapita Dev Root CA/OU=Development" -config "${CERTS_DIR}/rootCA.cnf"
 
   # Clean up the configuration file
   #rm "${CERTS_DIR}/rootCA.cnf"
@@ -49,7 +49,7 @@ EOM
   openssl genpkey -algorithm RSA -out "$SERVER_KEY"
 
   # Create a certificate signing request
-  openssl req -new -key "$SERVER_KEY" -out "${CERTS_DIR}/server.csr" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=*.qapitacorp.local"
+  openssl req -new -key "$SERVER_KEY" -out "${CERTS_DIR}/server.csr" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=*.qapitacorp.local/OU=Development"
 
   # Sign the CSR with the Root CA
   openssl x509 -req -in "${CERTS_DIR}/server.csr" -CA "$ROOT_CA" -CAkey "$ROOT_CA_KEY" -CAcreateserial -out "$SERVER_CERT" -days 365 -sha256 -extfile "${CERTS_DIR}/server.ext"

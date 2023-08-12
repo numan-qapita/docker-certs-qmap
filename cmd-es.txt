@@ -1,0 +1,19 @@
+docker run --name q-es --rm \
+-v v-es-db:/var/lib/eventstore \
+-v v-es-log:/var/log/eventstore \
+-v ~/wrk/tmp/docker-certs-qmap/certs/qapita-wildcard.pfx:/etc/eventstore/certs/cert.pfx \
+-v ~/wrk/tmp/docker-certs-qmap/certs/qapita-CA.pem:/etc/certs/CA.crt \
+-p 2113:2113 \
+-p 1113:1113 \
+-e EVENTSTORE_CLUSTER_SIZE=1 \
+-e EVENTSTORE_RUN_PROJECTIONS=All \
+-e EVENTSTORE_START_STANDARD_PROJECTIONS=true \
+-e EVENTSTORE_EXT_TCP_PORT=1113 \
+-e EVENTSTORE_HTTP_PORT=2113 \
+-e EVENTSTORE_INSECURE=false \
+-e EVENTSTORE_ENABLE_EXTERNAL_TCP=true \
+-e EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true \
+-e EVENTSTORE_TRUSTED_ROOT_CERTIFICATES_PATH=/etc/certs \
+-e EVENTSTORE_CERTIFICATE_FILE=/etc/eventstore/certs/cert.pfx \
+-e EVENTSTORE_CERTIFICATE_PASSWORD=PASSWORD \
+eventstore/eventstore:22.10.2-alpha-arm64v8
