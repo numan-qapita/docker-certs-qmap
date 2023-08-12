@@ -1,0 +1,2 @@
+subjectAltName = DNS:*.qapitacorp.local, DNS:*.qapita.local, DNS:*.qapita.app.local, DNS:localhost
+extendedKeyUsage = serverAuth
