@@ -1,4 +1,4 @@
-docker run --name q-es --rm \
+docker run --name q-es -d --restart always \
 -v v-es-db:/var/lib/eventstore \
 -v v-es-log:/var/log/eventstore \
 -v ~/wrk/tmp/docker-certs-qmap/certs/qapita-wildcard.pfx:/etc/eventstore/certs/cert.pfx \
