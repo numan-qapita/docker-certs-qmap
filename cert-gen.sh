@@ -1,11 +1,6 @@
 #!/bin/bash
 
-CERTS_DIR="certs"
-ROOT_CA="${CERTS_DIR}/qapita-CA.pem"
-ROOT_CA_KEY="${CERTS_DIR}/qapita-CA.pem.key"
-SERVER_CERT="${CERTS_DIR}/qapita-wildcard.pem"
-SERVER_KEY="${CERTS_DIR}/qapita-wildcard.pem.key"
-PFX_FILE="${CERTS_DIR}/qapita-wildcard.pfx"
+source vars.sh
 PASSWORD="PASSWORD"
 
 # Check and create the certs directory if not exists

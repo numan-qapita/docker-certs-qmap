@@ -1,8 +1,8 @@
 docker run --name q-es -d --restart always \
 -v v-es-db:/var/lib/eventstore \
 -v v-es-log:/var/log/eventstore \
--v ~/wrk/tmp/docker-certs-qmap/certs/qapita-wildcard.pfx:/etc/eventstore/certs/cert.pfx \
--v ~/wrk/tmp/docker-certs-qmap/certs/qapita-CA.pem:/etc/certs/CA.crt \
+-v ~/wrk/tmp/docker-certs-qmap/certs/qapitacorp.local.pfx:/etc/eventstore/certs/cert.pfx \
+-v ~/wrk/tmp/docker-certs-qmap/certs/Qapita_DEV_ROOT_CA.pem:/etc/certs/CA.crt \
 -p 2113:2113 \
 -p 1113:1113 \
 -e EVENTSTORE_CLUSTER_SIZE=1 \
@@ -16,4 +16,4 @@ docker run --name q-es -d --restart always \
 -e EVENTSTORE_TRUSTED_ROOT_CERTIFICATES_PATH=/etc/certs \
 -e EVENTSTORE_CERTIFICATE_FILE=/etc/eventstore/certs/cert.pfx \
 -e EVENTSTORE_CERTIFICATE_PASSWORD=PASSWORD \
-eventstore/eventstore:22.10.2-alpha-arm64v8
+eventstore/eventstore:23.6.0-buster-slim
