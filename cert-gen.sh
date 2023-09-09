@@ -31,10 +31,10 @@ basicConstraints = critical, CA:TRUE, pathlen:0
 EOM
 
   # Generate the root CA certificate
-  openssl req -x509 -new -key "$ROOT_CA_KEY" -sha256 -days 1024 -out "$ROOT_CA" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=Qapita Dev Root CA/OU=Development" -config "${CERTS_DIR}/qapita-CA.cnf"
+  openssl req -x509 -new -key "$ROOT_CA_KEY" -sha256 -days 3650 -out "$ROOT_CA" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=Qapita Dev Root CA/OU=Development" -config "${CERTS_DIR}/qapita-CA.cnf"
 
   # Clean up the configuration file
-  #rm "${CERTS_DIR}/qapita-CA.cnf"
+  rm "${CERTS_DIR}/qapita-CA.cnf"
 fi
 
 # Generate server certificate and its key if they are not available
