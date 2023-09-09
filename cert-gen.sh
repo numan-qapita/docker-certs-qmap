@@ -17,7 +17,7 @@ if [ ! -f "$ROOT_CA" ] || [ ! -f "$ROOT_CA_KEY" ]; then
   openssl genpkey -algorithm RSA -out "$ROOT_CA_KEY"
 
   # Create a configuration file for the Root CA
-  cat > "${CERTS_DIR}/rootCA.cnf" <<- EOM
+  cat > "${CERTS_DIR}/qapita-CA.cnf" <<- EOM
 [ req ]
 distinguished_name = req_distinguished_name
 x509_extensions = v3_ca
@@ -31,10 +31,10 @@ basicConstraints = critical, CA:TRUE, pathlen:0
 EOM
 
   # Generate the root CA certificate
-  openssl req -x509 -new -key "$ROOT_CA_KEY" -sha256 -days 1024 -out "$ROOT_CA" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=Qapita Dev Root CA/OU=Development" -config "${CERTS_DIR}/rootCA.cnf"
+  openssl req -x509 -new -key "$ROOT_CA_KEY" -sha256 -days 1024 -out "$ROOT_CA" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=Qapita Dev Root CA/OU=Development" -config "${CERTS_DIR}/qapita-CA.cnf"
 
   # Clean up the configuration file
-  #rm "${CERTS_DIR}/rootCA.cnf"
+  #rm "${CERTS_DIR}/qapita-CA.cnf"
 fi
 
 # Generate server certificate and its key if they are not available
