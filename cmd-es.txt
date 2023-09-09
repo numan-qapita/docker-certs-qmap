@@ -16,4 +16,4 @@ docker run --name q-es -d --restart always \
 -e EVENTSTORE_TRUSTED_ROOT_CERTIFICATES_PATH=/etc/certs \
 -e EVENTSTORE_CERTIFICATE_FILE=/etc/eventstore/certs/cert.pfx \
 -e EVENTSTORE_CERTIFICATE_PASSWORD=PASSWORD \
-eventstore/eventstore:23.6.0-buster-slim
+eventstore/eventstore:22.10.2-buster-slim
