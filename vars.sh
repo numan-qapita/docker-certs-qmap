@@ -13,3 +13,7 @@ SERVER_CERT_CRT="${SERVER_CERT_FILE_NAME}.crt"
 SERVER_KEY="${CERTS_DIR}/qapitacorp.local.key"
 
 PFX_FILE="${CERTS_DIR}/qapitacorp.local.pfx"
+
+EVENTSTORE_CERT="${CERTS_DIR}/eventstore.qapitacorp.local.pem"
+EVENTSTORE_KEY="${CERTS_DIR}/eventstore.qapitacorp.local.pem.key"
+EVENTSTORE_PFX="${CERTS_DIR}/eventstore.qapitacorp.local.pfx"

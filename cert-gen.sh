@@ -55,3 +55,24 @@ fi
 
 # Export the server certificate as a PFX file
 openssl pkcs12 -export -out "$PFX_FILE" -inkey "$SERVER_KEY" -in "$SERVER_CERT" -password pass:$PASSWORD
+
+# Generate server certificate and its key for eventstore.qapitacorp.local if they are not available
+if [ ! -f "$EVENTSTORE_CERT" ] || [ ! -f "$EVENTSTORE_KEY" ]; then
+  # Create a configuration file for the subjectAltName extension
+  cat > "${CERTS_DIR}/eventstore.ext" <<- EOM
+subjectAltName = DNS:eventstore.qapitacorp.local
+extendedKeyUsage = serverAuth
+EOM
+
+  # Generate the server key (specifying RSA algorithm)
+  openssl genpkey -algorithm RSA -out "$EVENTSTORE_KEY"
+
+  # Create a certificate signing request (CSR)
+  openssl req -new -key "$EVENTSTORE_KEY" -out "${CERTS_DIR}/eventstore.csr" -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Qapita FinTech Pte. Ltd./CN=eventstore.qapitacorp.local/OU=Development"
+
+  # Sign the CSR with the Root CA to generate the certificate
+  openssl x509 -req -in "${CERTS_DIR}/eventstore.csr" -CA "$ROOT_CA" -CAkey "$ROOT_CA_KEY" -CAcreateserial -out "$EVENTSTORE_CERT" -days 365 -sha256 -extfile "${CERTS_DIR}/eventstore.ext"
+fi
+
+# Export the server certificate for eventstore.qapitacorp.local as a PFX file
+openssl pkcs12 -export -out "$EVENTSTORE_PFX" -inkey "$EVENTSTORE_KEY" -in "$EVENTSTORE_CERT" -password pass:$PASSWORD
